@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+#DaumWebMasterTool:bf7d83bd45922774bdad3b03fac0fa8c8c21f695edbc06f0044609fcdc80741d:/lJDYpNEQ78RnQXN/HqAlA==
+Sitemap: https://insightfulreviews.github.io/sitemap.xml
