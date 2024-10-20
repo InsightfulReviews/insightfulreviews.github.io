@@ -1,4 +1,10 @@
-install_if -> { ENV["GITHUB_ACTIONS"] != "true" } do
-    puts "Is GitHub action: #{ENV["GITHUB_ACTIONS"] == "true"}"
-    gem "webrick", "~> 1.8"
-end 
+source "https://rubygems.org"
+
+gem "github-pages", group: :jekyll_plugins
+gem "jekyll-include-cache"
+gem "jekyll-paginate"
+gem "jekyll-sitemap"
+gem "jekyll-gist"
+gem "jekyll-feed"
+gem "jemoji"
+gem "webrick", "~> 1.7"
