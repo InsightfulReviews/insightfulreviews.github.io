@@ -1,26 +1,32 @@
-name: Build and deploy Jekyll site to GitHub Pages
+name: Jekyll site CI
 
 on:
   push:
     branches:
-      - main  # 또는 여러분의 기본 브랜치 이름
+      - main  # 기본 브랜치 (필요시 브랜치명 수정)
 
 jobs:
-  github-pages:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-ruby@v1
-        with:
-          ruby-version: '3.1'
-      - name: Install dependencies
-        run: |
-          gem install bundler
-          bundle install
-      - name: Build site
-        run: bundle exec jekyll build
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.0'  # 원하는 Ruby 버전 지정
+        bundler-cache: true  # 젬 캐싱 활성화
+
+    - name: Install dependencies
+      run: bundle install
+
+    - name: Build the site
+      run: bundle exec jekyll build
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./_site  # Jekyll의 기본 빌드 폴더
