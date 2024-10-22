@@ -20,10 +20,12 @@ author_profile: true
     {% for tag in site.tags %}
       {% if tag[1].size == i %}
         <li>
-          {% assign tag_name = tag[0] | strip %}
+          {% capture tag_name %}{{ tag[0] | strip }}{% endcapture %}
           {% if tag_name.size > 0 %}
-            <a href="#{{ tag_name | cgi_escape }}">
-              {{ tag_name }} <span class="count">({{ tag[1].size }})</span>
+            {% assign tag_id = tag_name | escape %}
+            <a href="#{{ tag_id }}">
+              {{ tag_name }}
+              <span class="count">({{ tag[1].size }})</span>
             </a>
           {% endif %}
         </li>
@@ -34,9 +36,10 @@ author_profile: true
 
 <h2>Posts by Tag</h2>
 {% for tag in site.tags %}
-  {% assign tag_name = tag[0] | strip %}
+  {% capture tag_name %}{{ tag[0] | strip }}{% endcapture %}
   {% if tag_name.size > 0 %}
-    <section id="{{ tag_name | cgi_escape }}">
+    {% assign tag_id = tag_name | escape %}
+    <section id="{{ tag_id }}">
       <h3>{{ tag_name }}</h3>
       <ul>
         {% for post in tag[1] %}
